@@ -20,7 +20,7 @@ func NewContext(r *http.Request) Context {
 }
 
 // Hostname returns the hostname of the current instance
-func Hostname(ctx context.Context) (string, error) {
+func Hostname(ctx context.Context, r *http.Request) (string, error) {
 	return appengine.ModuleHostname(ctx, "", "", "")
 }
 

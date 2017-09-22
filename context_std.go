@@ -15,11 +15,11 @@ func getContext(r *http.Request) context.Context {
 }
 
 // Hostname returns the hostname of the current instance
-func Hostname(ctx Context) (string, error) {
-	return strings.Split(Request(ctx).Host, ":")[0], nil
+func Hostname(ctx Context, r *http.Request) (string, error) {
+	return strings.Split(r.Host, ":")[0], nil
 }
 
-func WithValue(ctx Context) Context {
+func WithValue(ctx Context, key, val interface{}) Context {
 	return context.WithValue(ctx, key, val)
 }
 

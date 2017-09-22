@@ -4,6 +4,7 @@ package context
 
 import (
 	"net/http"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -27,18 +28,20 @@ func setNamespace(ctx context.Context) (context.Context, error) {
 }
 
 // Hostname returns the hostname of the current instance
-func Hostname(ctx context.Context) (string, error) {
+func Hostname(ctx context.Context, r *http.Request) (string, error) {
 	return appengine.ModuleHostname(ctx, "", "", "")
 }
 
-func WithValue(ctx Context) Context {
+func WithValue(ctx Context, key, val interface{}) Context {
 	return context.WithValue(ctx, key, val)
 }
 
 func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
-	return context.WithTimeout(parent, timeout)
+	ctx, cancel := context.WithTimeout(parent, timeout)
+	return ctx, CancelFunc(cancel)
 }
 
 func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc) {
-	return context.WithDeadline(parent, deadline)
+	ctx, cancel := context.WithDeadline(parent, deadline)
+	return ctx, CancelFunc(cancel)
 }
