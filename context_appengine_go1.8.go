@@ -1,4 +1,4 @@
-// +build appengine,go1.7
+// +build appengine,go1.8
 
 package context
 
@@ -6,13 +6,17 @@ import (
 	"net/http"
 	"time"
 
-	"golang.org/x/net/context"
+	"context"
 
 	"google.golang.org/appengine"
 )
 
 func getContext(r *http.Request) context.Context {
 	return context.WithValue(appengine.NewContext(r), ContextKeyEnvironment, "appengine")
+}
+
+func NewContext(r *http.Request) Context {
+	return appengine.NewContext(r)
 }
 
 // setNamespace sets a custom namespace if the `Namespace` variable is not nil
