@@ -30,3 +30,8 @@ func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
 func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc) {
 	return context.WithDeadline(parent, deadline)
 }
+
+// Background returns a new background context
+func Background() Context {
+	return context.Background()
+}

@@ -37,3 +37,7 @@ func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc) {
 	ctx, cancel := context.WithDeadline(parent, deadline)
 	return ctx, CancelFunc(cancel)
 }
+
+func Background() Context {
+	return context.Background()
+}
