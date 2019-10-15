@@ -21,7 +21,7 @@ func setNamespace(ctx context.Context) (context.Context, error) {
 
 // NewContext creates a new context associated with the request.
 func NewContext(r *http.Request) Context {
-	return context.Background()
+	return r.Context()
 }
 
 // Hostname returns the hostname of the current instance
